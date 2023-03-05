@@ -2,7 +2,7 @@ import React from 'react';
 
 const MainContext: React.FC = (props) => {
   return (
-    <div className="w-100">
+    <div className="w-100 h-100">
       {props.children}
     </div>
   )

@@ -1,0 +1,10 @@
+#root {
+  height: 100%;
+}
+
+html, body {
+  margin: 0px;
+  height: 100vh;
+  background-color: $background-color;
+  overflow: hidden;
+}

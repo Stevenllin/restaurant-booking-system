@@ -1,0 +1,22 @@
+.layout-background1 {
+  position: relative;
+  background-image: url('../../image/Steak.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.layout-background2 {
+  position: relative;
+  background-image: url('../../image/Lobster.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.background-filter {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $background-color;
+  opacity: 0.25;
+}
