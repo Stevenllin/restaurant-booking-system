@@ -1,0 +1,59 @@
+.homepage-container {
+  width: 80%;
+  height: 80vh;
+  background-color: $background-color-minor;
+  border-radius: 2rem;
+}
+
+.horizontal-line {
+  width: 35%;
+  height: 60px;
+  position: relative;
+  border-top: 6px dotted $background-color-minor;
+
+  & svg {
+    width: 3rem;
+    height: 3rem;
+    color: $icon-color;
+  }
+
+  & .active svg {
+    color: $icon-color-active;
+  }
+
+  & .step-1 {
+    padding: 0.25rem;
+    position: absolute;
+    bottom: 1.75rem;
+    left: -1.5rem;
+    border-radius: 10rem;
+    background-color: $background-color-minor;
+  }
+
+  & .step-2 {
+    padding: 0.25rem;
+    position: absolute;
+    bottom: 1.75rem;
+    left: 25%;
+    border-radius: 10rem;
+    background-color: $background-color-minor;
+  }
+
+  & .step-3 {
+    padding: 0.25rem;
+    position: absolute;
+    bottom: 1.75rem;
+    right: 25%;
+    border-radius: 10rem;
+    background-color: $background-color-minor;
+  }
+
+  & .step-4 {
+    padding: 0.25rem;
+    position: absolute;
+    bottom: 1.75rem;
+    right: -1.5rem;
+    border-radius: 10rem;
+    background-color: $background-color-minor;
+  }
+}

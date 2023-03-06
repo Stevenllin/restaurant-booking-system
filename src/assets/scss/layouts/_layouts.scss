@@ -17,6 +17,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: $background-color;
-  opacity: 0.25;
+  background: -webkit-radial-gradient(circle, $background-color-main,black);
+  background: -o-radial-gradient(circle, $background-color-main,black);
+  background: -moz-radial-gradient(circle, $background-color-main,black);
+  background: radial-gradient(circle, $background-color-main,black);
+  opacity: 0.5;
 }

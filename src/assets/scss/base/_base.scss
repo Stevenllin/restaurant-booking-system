@@ -2,9 +2,34 @@
   height: 100%;
 }
 
+/** html */
+
 html, body {
   margin: 0px;
   height: 100vh;
-  background-color: $background-color;
+  background-color: $background-color-main;
   overflow: hidden;
 }
+
+button {
+  all: unset;
+}
+
+/** html */
+
+/** common */
+.font-md {
+  font-size: $font-md;
+}
+
+.color-white {
+  color: $color-white;
+}
+
+.button-main {
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  background-color: $background-color-minor;
+}
+
+/** common */
