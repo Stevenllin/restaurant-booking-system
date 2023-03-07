@@ -1,5 +1,5 @@
 export enum ROUTES {
   FEATURES = '',
 
-  FEATURES__HOMEPAGE = '/homepage'
+  FEATURES__BOOKING = '/booking'
 }

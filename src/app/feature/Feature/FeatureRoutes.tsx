@@ -9,10 +9,10 @@ const FeaturesRoutes: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <Route
-            path={ROUTES.FEATURES__HOMEPAGE}
-            component={React.lazy(() => import('./Homepage'))}
+            path={ROUTES.FEATURES__BOOKING}
+            component={React.lazy(() => import('./Booking'))}
           />
-          <Redirect to={ROUTES.FEATURES__HOMEPAGE} />
+          <Redirect to={ROUTES.FEATURES__BOOKING} />
         </Switch>
       </BrowserRouter>
     </React.Suspense>
