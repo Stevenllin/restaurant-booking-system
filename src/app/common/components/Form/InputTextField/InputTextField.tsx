@@ -1,86 +1,35 @@
+import React from 'react';
 import { ErrorMessage } from '@hookform/error-message';
-import { useController, useFormContext, FieldValues, ControllerRenderProps } from 'react-hook-form';
+import InputText from '../Element/InputText';
 import ErrorMsg from '../ErrorMsg';
+import { InputTextFieldProps } from './types';
 
-const InputTextByContext = ({
-  field,
-  type,
-  placeholder,
-  handleChange
-}: {
-  field: ControllerRenderProps<FieldValues, string>,
-  type: string,
-  placeholder?: string,
-  handleChange?: () => void
-}) => {
-  console.log('{...field}', field);
-  // const { register } = useFormContext();
-  // const control = register(fieldName);
-  // const { field } = useController(control);
-  return (
-    <>
-      <input
-        {...field}
-        type={type}
-        placeholder={placeholder}
-        onChange={(event) => {
-          if (handleChange) return field.onChange(event)
-        }}
-      />
-    </>
-  )
-}
-
-InputTextByContext.displayName = 'InputTextByContext'
-
-const InputTextField = ({
-  label,
-  fieldName,
-  type,
-  placeholder,
-  asterisk = false,
-  handleChange
-}: {
-  label: string,
-  fieldName: string,
-  type: string,
-  placeholder?: string,
-  asterisk: boolean,
-  handleChange?: () => void
-}) => {
-  const { register } = useFormContext();
-  const  control = register(fieldName);
-  const { field, formState } = useController(control);
-
-  return (
-    <div className="input-text-field">
-      {
-        label && (
-          <label>
-            <p className="d-flex align-items-center">{label} {asterisk && <span className="ms-2 color-danger">*</span>}</p>
+const InputTextField = React.forwardRef<HTMLInputElement, InputTextFieldProps>(
+  ({ label, type, placeholder, asterisk, errors, ...props }, ref) => {
+    return (
+      <div className="input-text-field">
+        {label && (
+          <label className="my-2">
+            <p className="text-uppercase d-flex align-items-center">
+              {label} {asterisk && <span className="color-danger ms-2">*</span>}
+            </p>
           </label>
-        )
-      }
-      <InputTextByContext
-        field={field}
-        type={type}
-        placeholder={placeholder}
-        handleChange={handleChange}
-      />
-      {
-        formState.errors && (
+        )}
+        <InputText type={type} placeholder={placeholder} {...props} ref={ref} />
+        {errors !== undefined && Object.keys(errors).length !== 0 && (
           <ErrorMessage
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             /** @ts-ignore */
-            name={field.name}
-            errors={formState.errors}
+            name={props.name}
+            errors={errors}
             render={({ message }) => <ErrorMsg>{message}</ErrorMsg>}
           />
-        )
-      }
-    </div>
-  )
-}
+        )}
+      </div>
+    );
+  }
+);
 
-InputTextField.displayName = 'InputTextField'
+InputTextField.displayName = 'InputTextField';
 
 export default InputTextField;

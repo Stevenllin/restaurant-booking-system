@@ -23,24 +23,27 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
       }]
     }
   });
-  console.log(getValues());
+  const handleSubmit = () => {
+    console.log('reactHookForm', reactHookForm.getValues());
+    props.setStep(1)
+  };
   return (
-    <form className="d-flex flex-column align-items-center justify-content-between h-100 p-5">
+    <form className="d-flex flex-column align-items-center justify-content-between h-100 p-5" onSubmit={reactHookForm.handleSubmit(handleSubmit)}>
       {/* <p className="font-md color-white">Basic Information</p> */}
       <div className="booking-step1-content">
         <p className="title-main">Booker's information</p>
         <div className="w-100 d-flex mb-4">
           <InputTextField
-            label="name"
-            fieldName="name"
+            label="username"
             type="text"
-            asterisk={true}
+            asterisk
+            {...reactHookForm.register('booker.name')}
           />
           <InputTextField
-            label="phone"
-            fieldName="phone"
-            type="phone"
-            asterisk={true}
+            label="username"
+            type="text"
+            asterisk
+            {...reactHookForm.register('booker.phone')}
           />
         </div>
         <p className="title-main">Other's information</p>
@@ -48,16 +51,16 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
           reactHookForm.watch('others')?.map((person) => (
             <div key={person.id} className="w-100 d-flex mb-4">
               <InputTextField
-                label="name"
-                fieldName={`others.${person.id}.name`}
+                label="username"
                 type="text"
-                asterisk={true}
+                asterisk
+                {...reactHookForm.register(`others.${person.id}.name`)}
               />
               <InputTextField
-                label="phone"
-                fieldName={`others.${person.id}.phone`}
-                type="phone"
-                asterisk={true}
+                label="username"
+                type="text"
+                asterisk
+                {...reactHookForm.register(`others.${person.id}.phone`)}
               />
             </div>
           ))
@@ -68,10 +71,9 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
       </div>
       <div className="d-flex justify-content-center">
         <button
-          type="button"
+          type="submit"
           className="text-uppercase button-main"
-          onClick={() => props.setStep(1)}
-          >
+        >
           next page
         </button>
       </div>

@@ -59,7 +59,7 @@ const BookingLayout: React.FC = () => {
         {/** 待釐清 */}
         {/** @ts-ignore */}
         <FormProvider {...reactHookForm}>
-          <div className="booking-layout-container" onSubmit={reactHookForm.handleSubmit(onSubmit)}>
+          <div className="booking-layout-container">
             {currentStep === 1 && <BookingStep1 setStep={handleSetCurrentStep} />}
             {currentStep === 2 && <BookingStep2 setStep={handleSetCurrentStep} />}
             {currentStep === 3 && <BookingStep3 setStep={handleSetCurrentStep} />}
