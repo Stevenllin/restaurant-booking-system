@@ -63,6 +63,7 @@ const InputTextField = ({
       {
         formState.errors && (
           <ErrorMessage
+            /** @ts-ignore */
             name={field.name}
             errors={formState.errors}
             render={({ message }) => <ErrorMsg>{message}</ErrorMsg>}

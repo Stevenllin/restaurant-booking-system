@@ -4,7 +4,8 @@
 
 /** html */
 
-html, body {
+html,
+body {
   margin: 0px;
   height: 100vh;
   background-color: $background-color-main;
@@ -27,8 +28,18 @@ button {
 }
 
 .button-main {
+  min-width: 100px;
   padding: 1rem 2rem;
   border-radius: 2rem;
+  color: $color-white;
+  background-color: $button-main-color;
+}
+
+.button-minor {
+  min-width: 100px;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  color: $color-white;
   background-color: $background-color-minor;
 }
 

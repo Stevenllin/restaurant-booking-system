@@ -5,10 +5,10 @@ export const initBookingFormStep1: () => BookingStep1 = () => {
     date: '',
     booker: {
       name: '',
-      gender: '',
       phone: '',
       birthday: ''
-    }
+    },
+    others: []
   }
   return form;
 }

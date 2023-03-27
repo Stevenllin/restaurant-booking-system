@@ -14,7 +14,7 @@ const Booking: React.FC = () => {
         display === false && (
           <button
             type="button"
-            className="button-main font-md color-white text-uppercase"
+            className="button-minor font-md color-white text-uppercase"
             onClick={handleSetDisplay}
           >
             Book a table?
