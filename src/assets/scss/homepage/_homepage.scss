@@ -1,5 +1,5 @@
 .homepage-container {
-  width: 80%;
+  width: 90%;
   height: 80vh;
   background-color: $background-color-minor;
   border-radius: 2rem;
@@ -56,4 +56,8 @@
     border-radius: 10rem;
     background-color: $background-color-minor;
   }
+}
+
+.booking-layout-container {
+  height: 100%;
 }

@@ -1,9 +1,10 @@
-import { BookingStep1 } from './types';
+import { BookingStep1Form } from './types';
 
-export const initBookingFormStep1: () => BookingStep1 = () => {
-  const form: BookingStep1 = {
+export const initBookingFormStep1: () => BookingStep1Form = () => {
+  const form: BookingStep1Form = {
     date: '',
     booker: {
+      id: 1,
       name: '',
       phone: '',
       birthday: ''

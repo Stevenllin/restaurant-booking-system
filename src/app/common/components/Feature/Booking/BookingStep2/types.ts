@@ -1,4 +1,6 @@
-export interface BookingStep2Props {}
+export interface BookingStep2Props {
+  setStep: (number: number) => void;
+}
 
 export interface BookingStep2 {
   meals: Meal[];

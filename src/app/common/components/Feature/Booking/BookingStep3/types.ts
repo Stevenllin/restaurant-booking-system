@@ -1,4 +1,6 @@
-export interface BookingStep3Props {}
+export interface BookingStep3Props {
+  setStep: (number: number) => void;
+}
 
 export interface BookingStep3 {
   aperitif: Dish[];

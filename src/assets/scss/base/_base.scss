@@ -23,8 +23,18 @@ button {
   font-size: $font-md;
 }
 
+.title-main {
+  color: $color-white;
+  font-size: $font-md;
+  text-align: center;
+}
+
 .color-white {
   color: $color-white;
+}
+
+.color-danger {
+  color: $color-danger;
 }
 
 .button-main {

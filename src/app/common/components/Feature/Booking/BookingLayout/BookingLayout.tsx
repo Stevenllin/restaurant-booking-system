@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { initBookingForm } from './form';
@@ -18,8 +18,6 @@ const BookingLayout: React.FC = () => {
   const reactHookForm = useForm<BookingFormValues>({
     defaultValues: initBookingForm()
   })
-
-  console.log(reactHookForm.getValues());
 
   const handleSetCurrentStep = (number: number) => {
     setCurrentStep(currentStep + number)
@@ -61,65 +59,11 @@ const BookingLayout: React.FC = () => {
         {/** 待釐清 */}
         {/** @ts-ignore */}
         <FormProvider {...reactHookForm}>
-          <form onSubmit={reactHookForm.handleSubmit(onSubmit)}>
-            {currentStep === 1 && <BookingStep1 />}
-            {currentStep === 2 && <BookingStep2 />}
-            {currentStep === 3 && <BookingStep3 />}
-
-            {
-              currentStep === 1 && (
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="text-uppercase button-main"
-                    onClick={() => handleSetCurrentStep(1)}
-                  >
-                    next page
-                  </button>
-                </div>
-              )
-            }
-            {
-              currentStep === 2 && (
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="text-uppercase button-main"
-                    onClick={() => handleSetCurrentStep(-1)}
-                  >
-                    previous page
-                  </button>
-                  <button
-                    type="button"
-                    className="text-uppercase button-main"
-                    onClick={() => handleSetCurrentStep(1)}
-                  >
-                    next page
-                  </button>
-                </div>
-              )
-            }
-            {
-              currentStep === 3 && (
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="button"
-                    className="text-uppercase button-main"
-                    onClick={() => handleSetCurrentStep(-1)}
-                  >
-                    previous page
-                  </button>
-                  <button
-                    type="button"
-                    className="text-uppercase"
-                    onClick={() => handleSetCurrentStep(1)}
-                  >
-                    next page
-                  </button>
-                </div>
-              )
-            }
-          </form>
+          <div className="booking-layout-container" onSubmit={reactHookForm.handleSubmit(onSubmit)}>
+            {currentStep === 1 && <BookingStep1 setStep={handleSetCurrentStep} />}
+            {currentStep === 2 && <BookingStep2 setStep={handleSetCurrentStep} />}
+            {currentStep === 3 && <BookingStep3 setStep={handleSetCurrentStep} />}
+          </div>
         </FormProvider>
       </motion.div>
     </>
