@@ -7,7 +7,7 @@ import { InputTextFieldProps } from './types';
 const InputTextField = React.forwardRef<HTMLInputElement, InputTextFieldProps>(
   ({ label, type, placeholder, asterisk, errors, ...props }, ref) => {
     return (
-      <div className="input-text-field">
+      <div className="input-text-field m-1">
         {label && (
           <label className="my-2">
             <p className="text-uppercase d-flex align-items-center">
