@@ -1,12 +1,7 @@
-import { BookingStep3 } from './types';
+import { BookingStep3Form } from './types';
 
-export const initBookingFormStep3: () => BookingStep3 = () => {
-  const form: BookingStep3 = {
-    aperitif: [],
-    starter: [],
-    salad: [],
-    soup: [],
-    main: [],
+export const initBookingFormStep3: () => BookingStep3Form = () => {
+  const form: BookingStep3Form = {
     beverage: []
   }
   return form;
