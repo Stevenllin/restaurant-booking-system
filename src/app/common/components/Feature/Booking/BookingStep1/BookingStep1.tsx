@@ -7,11 +7,12 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BookingStep1Form, BookingStep1Props } from './types';
 
 const BookingStep1: React.FC<BookingStep1Props> = (props) => {
-  const { reset, getValues, register, watch, formState, trigger } = useFormContext<BookingFormValues>();
+  const { reset, getValues, register, watch, formState, trigger, setValue } = useFormContext<BookingFormValues>();
   const reactHookForm = useForm<BookingStep1Form>({
     defaultValues: {
       date: getValues('date'),
       booker: {
+        id: getValues('booker.id'),
         name: getValues('booker.name'),
         phone: getValues('booker.phone')
       },
@@ -38,7 +39,17 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   };
 
   const handleSubmit = () => {
-    console.log('reactHookForm', reactHookForm.getValues());
+    const bookerId = reactHookForm.getValues('booker.id');
+    const bookerName = reactHookForm.getValues('booker.name');
+    const bookerPhone = reactHookForm.getValues('booker.phone');
+    const copiedOthers = reactHookForm.getValues('others')?.map(item => {
+      return { ...item }
+    }) ?? []
+
+    setValue('booker.id', bookerId)
+    setValue('booker.name', bookerName)
+    setValue('booker.phone', bookerPhone)
+    setValue('others', copiedOthers)
     props.setStep(1)
   };
 
@@ -91,7 +102,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
           type="submit"
           className="text-uppercase button-main"
         >
-          next page
+          next
         </button>
       </div>
     </form>

@@ -1,0 +1,53 @@
+.booking-step2-content {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+
+  & svg {
+    width: 50px;
+    height: 50px;
+    color: $icon-color;
+
+    &:hover {
+      color: $icon-color-active;
+      cursor: pointer;
+    }
+  }
+}
+
+.food-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  background-position: center;
+  background-size: cover;
+  border-radius: $border-radius-md;
+
+  &.starter1 {
+    background-image: url("../../image/Starter1.jpeg");
+  }
+  &.starter2 {
+    background-image: url("../../image/Starter2.jpeg");
+  }
+  &.starter3 {
+    background-image: url("../../image/Starter3.jpeg");
+  }
+
+  &.salad1 {
+    background-image: url("../../image/Salad1.jpeg");
+  }
+  &.salad2 {
+    background-image: url("../../image/Salad2.jpeg");
+  }
+  &.salad3 {
+    background-image: url("../../image/Salad3.jpeg");
+  }
+}
+// Smoked Salmon Carpaccio With Horseradish
+// Prawn, Avocado Canapes with Chipotle Aioli
+// Poached egg with mushrooms a la Grecque and olive oil crisps
+
+// GREEN GODDESS POTATO SALAD
+// fruit salad
+// beef salad

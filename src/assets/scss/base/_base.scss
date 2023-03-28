@@ -29,6 +29,10 @@ button {
   text-align: center;
 }
 
+.color-main {
+  color: $color-main;
+}
+
 .color-white {
   color: $color-white;
 }
@@ -40,6 +44,7 @@ button {
 .button-main {
   min-width: 100px;
   padding: 1rem 2rem;
+  text-align: center;
   border-radius: 2rem;
   color: $color-white;
   background-color: $button-main-color;
@@ -48,6 +53,7 @@ button {
 .button-minor {
   min-width: 100px;
   padding: 1rem 2rem;
+  text-align: center;
   border-radius: 2rem;
   color: $color-white;
   background-color: $background-color-minor;
