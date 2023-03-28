@@ -5,6 +5,7 @@
 }
 
 .beverage-container {
+  position: relative;
   width: 250px;
   height: 250px;
   margin: 10px;
@@ -15,6 +16,24 @@
   background-position: center;
   background-size: cover;
   border-radius: $border-radius-md;
+
+  .beverage-number {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-white;
+    border-radius: 50%;
+    background-color: $color-danger;
+
+    p {
+      margin: 0px;
+    }
+  }
 
   .beverage-operate {
     width: 80%;
@@ -66,5 +85,3 @@
     background-image: url("../../image/Beverage8.jpeg");
   }
 }
-
-// Blood & Sand

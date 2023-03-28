@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 import { BookingStep2Props, BookingStep2Form } from './types';
 
 const BookingStep2: React.FC<BookingStep2Props> = (props) => {
-  const { getValues } = useFormContext<BookingFormValues>();
+  const { setValue, getValues } = useFormContext<BookingFormValues>();
   const [customers, setCustomers] = useState<string[]>([]);
   const reactHookForm = useForm<BookingStep2Form>({
     defaultValues: {
@@ -20,7 +20,8 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
   }, [getValues])
 
   const handleSubmit = () => {
-    console.log(reactHookForm.getValues());
+    const meals = reactHookForm.getValues('meals');
+    setValue('meals', meals);
     props.setStep(1)
   }
 
