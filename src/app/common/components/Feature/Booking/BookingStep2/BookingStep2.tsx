@@ -159,7 +159,33 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
 
               <p className="title-main">Dessert</p>
               <div className="d-flex justify-content-center">
-
+                <label className="labl">
+                  <input
+                    type="radio"
+                    {...reactHookForm.register(`meals.${index}.dessert`)}
+                    value="meyer lemon plated dessert"
+                  />
+                  <div className="food-container dessert1"></div>
+                  <p className="color-white font-sm">meyer lemon plated dessert</p>
+                </label>
+                <label className="labl">
+                  <input
+                    type="radio"
+                    {...reactHookForm.register(`meals.${index}.dessert`)}
+                    value="Salted caramel tart with banana and passion fruit sorbet"
+                  />
+                  <div className="food-container dessert2"></div>
+                  <p className="color-white font-sm">Salted caramel tart with banana and passion fruit sorbet</p>
+                </label>
+                <label className="labl">
+                  <input
+                    type="radio"
+                    {...reactHookForm.register(`meals.${index}.dessert`)}
+                    value="RASPBERRY BAVAROIS WITH RASPBERRY SORBET"
+                  />
+                  <div className="food-container dessert3"></div>
+                  <p className="color-white font-sm">RASPBERRY BAVAROIS WITH RASPBERRY SORBET</p>
+                </label>
               </div>
             </div>
           ))
