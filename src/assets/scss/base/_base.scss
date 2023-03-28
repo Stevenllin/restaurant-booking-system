@@ -16,9 +16,34 @@ button {
   all: unset;
 }
 
+.labl {
+  display: block;
+  width: 400px;
+}
+
+.labl > input {
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+
+.labl > input + div {
+  /* DIV STYLES */
+  cursor: pointer;
+}
+
+.labl > input:checked + div {
+  /* (RADIO CHECKED) DIV STYLES */
+  border: 5px solid $border-color-focus;
+  opacity: 0.65;
+}
+
 /** html */
 
 /** common */
+.font-sm {
+  font-size: $font-sm;
+}
+
 .font-md {
   font-size: $font-md;
 }

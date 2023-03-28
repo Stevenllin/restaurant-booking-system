@@ -16,10 +16,15 @@
 }
 
 .food-container {
-  position: relative;
   width: 250px;
   height: 250px;
   margin: 10px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-sm;
+  color: $color-white;
   background-position: center;
   background-size: cover;
   border-radius: $border-radius-md;
@@ -43,11 +48,26 @@
   &.salad3 {
     background-image: url("../../image/Salad3.jpeg");
   }
-}
-// Smoked Salmon Carpaccio With Horseradish
-// Prawn, Avocado Canapes with Chipotle Aioli
-// Poached egg with mushrooms a la Grecque and olive oil crisps
 
-// GREEN GODDESS POTATO SALAD
-// fruit salad
-// beef salad
+  &.soup1 {
+    background-image: url("../../image/Soup1.jpeg");
+  }
+  &.soup2 {
+    background-image: url("../../image/Soup2.jpeg");
+  }
+  &.soup3 {
+    background-image: url("../../image/Soup3.jpeg");
+  }
+
+  &.main1 {
+    background-image: url("../../image/Main1.jpeg");
+  }
+  &.main2 {
+    background-image: url("../../image/Main2.jpeg");
+  }
+  &.main3 {
+    background-image: url("../../image/Main3.jpeg");
+  }
+}
+
+// White peach charred and marinated in basil and honeysuckle sugar syrup, lemon and creme fraiche pannacotta, almond brittle, basil and honeysuckle syrup, fresh honeysuckle

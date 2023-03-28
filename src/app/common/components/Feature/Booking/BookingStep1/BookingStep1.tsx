@@ -7,7 +7,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { BookingStep1Form, BookingStep1Props } from './types';
 
 const BookingStep1: React.FC<BookingStep1Props> = (props) => {
-  const { reset, getValues, register, watch, formState, trigger, setValue } = useFormContext<BookingFormValues>();
+  const { getValues, setValue } = useFormContext<BookingFormValues>();
   const reactHookForm = useForm<BookingStep1Form>({
     defaultValues: {
       date: getValues('date'),

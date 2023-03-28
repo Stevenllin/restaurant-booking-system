@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { initBookingForm } from './form';
 import { motion } from 'framer-motion';
 import { BsPeopleFill } from 'react-icons/bs';
@@ -21,10 +20,6 @@ const BookingLayout: React.FC = () => {
 
   const handleSetCurrentStep = (number: number) => {
     setCurrentStep(currentStep + number)
-  }
-  
-  const onSubmit = () => {
-    console.log('onSubmit');
   }
 
   return (
