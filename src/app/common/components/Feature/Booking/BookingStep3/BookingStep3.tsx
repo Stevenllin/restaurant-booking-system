@@ -38,12 +38,14 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
       })
       reactHookForm.setValue('beverage', beverageUpdated);
     } else {
-      copied.push({
-        name: beverage,
-        number: 1,
-        price: price
-      })
-      reactHookForm.setValue('beverage', copied);
+      if (action === PlusAndMinusValueEnum.Plus) {
+        copied.push({
+          name: beverage,
+          number: 1,
+          price: price
+        })
+        reactHookForm.setValue('beverage', copied);
+      }
     }
   }
 
@@ -72,8 +74,8 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>PEAR + LEMON FIZZ</p>
-              <p>9</p>
+              <p className="px-2">Pear + Lemon Fizz</p>
+              <p className="px-2">£11</p>
             </div>
           </div>
           <div className="px-2">
@@ -89,8 +91,8 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>Spiced Honey Bourbon Old Fashioned</p>
-              <p>9</p>
+              <p className="px-2">Spiced Honey Bourbon Old Fashioned</p>
+              <p className="px-2">£12</p>
             </div>
           </div>
           <div className="px-2">
@@ -106,8 +108,8 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>The Hermione Granger Cocktail</p>
-              <p>9</p>
+              <p className="px-2">The Hermione Granger Cocktail</p>
+              <p className="px-2">£11</p>
             </div>
           </div>
         </div>
@@ -125,8 +127,8 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>Vampire Cynar Negroni</p>
-              <p>9</p>
+              <p className="px-2">Vampire Cynar Negroni</p>
+              <p className="px-2">£12</p>
             </div>
           </div>
           <div className="px-2">
@@ -142,8 +144,8 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>Blood & Sand</p>
-              <p>9</p>
+              <p className="px-2">Blood & Sand</p>
+              <p className="px-2">£11</p>
             </div>
           </div>
           <div className="px-2">
@@ -159,8 +161,8 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>Gin Basil Smash</p>
-              <p>9</p>
+              <p className="px-2">Gin Basil Smash</p>
+              <p className="px-2">£10</p>
             </div>
           </div>
         </div>
@@ -180,14 +182,65 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>Watermelon Strawberry Lemonade</p>
-              <p>9</p>
+              <p className="px-2">Watermelon Strawberry Lemonade</p>
+              <p className="px-2">£7</p>
+            </div>
+          </div>
+          <div className="px-2">
+            <div className="beverage-container beverage11">
+              {reactHookForm.watch('beverage').filter(item => item.name === 'Orange juice')[0]?.number > 0 && (
+                <div className="beverage-number">
+                  <p>{reactHookForm.getValues('beverage').find(item => item.name === 'Orange juice')?.number}</p>
+                </div>
+              )}
+              <div className="beverage-operate">
+                <AiOutlineMinus onClick={() => handleBeverage(PlusAndMinusValueEnum.Minus, 'Orange juice', 9)} />
+                <AiOutlinePlus onClick={() => handleBeverage(PlusAndMinusValueEnum.Plus, 'Orange juice', 9)} />
+              </div>
+            </div>
+            <div className="d-flex justify-content-between color-white font-sm">
+              <p className="px-2">Orange juice</p>
+              <p className="px-2">£5</p>
+            </div>
+          </div>
+          <div className="px-2">
+            <div className="beverage-container beverage12">
+              {reactHookForm.watch('beverage').filter(item => item.name === 'Pineapple Coconut Smoothie')[0]?.number > 0 && (
+                <div className="beverage-number">
+                  <p>{reactHookForm.getValues('beverage').find(item => item.name === 'Pineapple Coconut Smoothie')?.number}</p>
+                </div>
+              )}
+              <div className="beverage-operate">
+                <AiOutlineMinus onClick={() => handleBeverage(PlusAndMinusValueEnum.Minus, 'Pineapple Coconut Smoothie', 9)} />
+                <AiOutlinePlus onClick={() => handleBeverage(PlusAndMinusValueEnum.Plus, 'Pineapple Coconut Smoothie', 9)} />
+              </div>
+            </div>
+            <div className="d-flex justify-content-between color-white font-sm">
+              <p className="px-2">Pineapple Coconut Smoothie</p>
+              <p className="px-2">£7</p>
             </div>
           </div>
         </div>
 
-        <p className="title-main">Coffee & Tee</p>
+        <p className="title-main">Coffee & Tea</p>
         <div className="d-flex justify-content-center">
+          <div className="px-2">
+            <div className="beverage-container beverage9">
+              {reactHookForm.watch('beverage').filter(item => item.name === 'Hot Latte')[0]?.number > 0 && (
+                <div className="beverage-number">
+                  <p>{reactHookForm.getValues('beverage').find(item => item.name === 'Hot Latte')?.number}</p>
+                </div>
+              )}
+              <div className="beverage-operate">
+                <AiOutlineMinus onClick={() => handleBeverage(PlusAndMinusValueEnum.Minus, 'Hot Latte', 9)} />
+                <AiOutlinePlus onClick={() => handleBeverage(PlusAndMinusValueEnum.Plus, 'Hot Latte', 9)} />
+              </div>
+            </div>
+            <div className="d-flex justify-content-between color-white font-sm">
+              <p className="px-2">Hot Latte</p>
+              <p className="px-2">£5</p>
+            </div>
+          </div>
           <div className="px-2">
             <div className="beverage-container beverage1">
               {reactHookForm.watch('beverage').filter(item => item.name === 'Iced Matcha Latte')[0]?.number > 0 && (
@@ -201,8 +254,25 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
               </div>
             </div>
             <div className="d-flex justify-content-between color-white font-sm">
-              <p>Iced Matcha Latte</p>
-              <p>9</p>
+              <p className="px-2">Iced Matcha Latte</p>
+              <p className="px-2">£5</p>
+            </div>
+          </div>
+          <div className="px-2">
+            <div className="beverage-container beverage10">
+              {reactHookForm.watch('beverage').filter(item => item.name === 'Moon Mike Tea')[0]?.number > 0 && (
+                <div className="beverage-number">
+                  <p>{reactHookForm.getValues('beverage').find(item => item.name === 'Moon Mike Tea')?.number}</p>
+                </div>
+              )}
+              <div className="beverage-operate">
+                <AiOutlineMinus onClick={() => handleBeverage(PlusAndMinusValueEnum.Minus, 'Moon Mike Tea', 9)} />
+                <AiOutlinePlus onClick={() => handleBeverage(PlusAndMinusValueEnum.Plus, 'Moon Mike Tea', 9)} />
+              </div>
+            </div>
+            <div className="d-flex justify-content-between color-white font-sm">
+              <p className="px-2">Moon Mike Tea</p>
+              <p className="px-2">£5</p>
             </div>
           </div>
         </div>
