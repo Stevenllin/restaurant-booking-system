@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { BookingFormValues } from '../BookingLayout/types';
 import { useFormContext } from 'react-hook-form';
 import InputTextField from 'app/common/components/Form/InputTextField/InputTextField';
+import DatePickerField from 'app/common/components/Form/DatePickerField';
 import validationService from 'app/core/service/validationService';
 import { AiOutlinePlusCircle } from 'react-icons/ai'; 
 import { BookingStep1Form, BookingStep1Props } from './types';
@@ -82,6 +83,10 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
             {...reactHookForm.register('booker.name')}
             errors={reactHookForm.formState.errors}
           />
+          <DatePickerField
+            label="birthday"
+            name="booker.name"
+          />
           <InputTextField
             label="phone"
             type="tel"
@@ -100,6 +105,10 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
                 asterisk
                 {...reactHookForm.register(`others.${person.id}.name`)}
                 errors={reactHookForm.formState.errors}
+              />
+              <DatePickerField
+                label="birthday"
+                name={`others.${person.id}.birthday`}
               />
               <InputTextField
                 label="phone"

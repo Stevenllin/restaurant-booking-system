@@ -1,7 +1,7 @@
 import React from 'react';
 import { ErrorMessage } from '@hookform/error-message';
-import InputText from '../Element/InputText';
 import ErrorMsg from '../ErrorMsg';
+import InputText from '../Element/InputText';
 import { InputTextFieldProps } from './types';
 
 const InputTextField = React.forwardRef<HTMLInputElement, InputTextFieldProps>(

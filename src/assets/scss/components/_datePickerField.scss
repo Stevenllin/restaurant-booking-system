@@ -1,0 +1,131 @@
+.date-picker-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & label {
+    font-size: $font-md;
+    color: $color-main;
+  }
+
+  .date-picker {
+    position: relative;
+    & input {
+      outline: none;
+      width: 100%;
+      padding: 0.6rem 0.6rem;
+      color: $color-white;
+      background-color: $background-input-color;
+      border-radius: $border-radius-xs;
+      border: 2px solid $background-input-color;
+    }
+    .date-picker-icons {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      right: 5%;
+      top: 0;
+
+      svg {
+        width: 30px;
+        height: 30px;
+        color: $icon-color-2;
+      }
+    }
+  }
+  .calendar {
+    left: 0;
+    top: 120px;
+    width: 321px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.15);
+    // border: 3px solid $border-color-focus;
+    padding: 1rem 0.5rem;
+    position: absolute;
+    z-index: 1000;
+
+    .calendar-header {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      select {
+        background-color: #efefef;
+        border: none;
+        border-radius: $border-radius-md;
+        text-align: center;
+        line-height: 1;
+        margin: 0 7px;
+        padding: 7px 10px;
+        cursor: pointer;
+        outline: none;
+        appearance: none;
+      }
+    }
+    .calendar-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      li {
+        width: 43px;
+        height: 43px;
+        padding: 4px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .calendar-week-scope {
+      color: $color-main;
+    }
+    .calendar-day {
+      &:not(&--today):not(&--active) {
+        span {
+          &:hover {
+            background-color: #efefef;
+          }
+        }
+      }
+      &-today {
+        span {
+          background-color: rgba(#e29d5c, 0.25);
+          color: #e29d5c;
+        }
+      }
+      &-active {
+        span {
+          background-color: #4d8e9c;
+          color: #ffffff;
+          cursor: default;
+        }
+      }
+      span {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
