@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import { BookingFormValues } from '../BookingLayout/types';
 import { useFormContext } from 'react-hook-form';
+import ErrorMsg from '../../../Form/ErrorMsg';
 import { BookingStep2Props, BookingStep2Form } from './types';
 
 const BookingStep2: React.FC<BookingStep2Props> = (props) => {
   const { setValue, getValues } = useFormContext<BookingFormValues>();
   const [customers, setCustomers] = useState<string[]>([]);
+  const schema = Yup.object().shape({
+    meals: Yup.array().of(
+      Yup.object().shape({
+        starter: Yup.string().required(),
+        salad: Yup.string().required(),
+        soup: Yup.string().required(),
+        main: Yup.string().required(),
+        dessert: Yup.string().required()
+      })
+    )
+  });
   const reactHookForm = useForm<BookingStep2Form>({
     defaultValues: {
       meals: []
-    }
+    },
+    /** @ts-ignore */
+    resolver: yupResolver(schema)
   });
 
   useEffect(() => {
@@ -64,6 +81,11 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
                   <p className="color-white font-sm">Poached egg with mushrooms a la Grecque and olive oil crisps</p>
                 </label>
               </div>
+              <ErrorMessage
+                name={`meals.${index}.starter`}
+                errors={reactHookForm.formState.errors}
+                render={() => <ErrorMsg>You haven't selected your starter</ErrorMsg>}
+              />
 
               <p className="title-main">Salad</p>
               <div className="d-flex justify-content-center">
@@ -95,6 +117,11 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
                   <p className="color-white font-sm">beef salad</p>
                 </label>
               </div>
+              <ErrorMessage
+                name={`meals.${index}.salad`}
+                errors={reactHookForm.formState.errors}
+                render={() => <ErrorMsg>You haven't selected your salad</ErrorMsg>}
+              />
 
               <p className="title-main">Soup</p>
               <div className="d-flex justify-content-center">
@@ -126,8 +153,13 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
                   <p className="color-white font-sm">Roasted Vegetable Soup</p>
                 </label>
               </div>
+              <ErrorMessage
+                name={`meals.${index}.soup`}
+                errors={reactHookForm.formState.errors}
+                render={() => <ErrorMsg>You haven't selected your soup</ErrorMsg>}
+              />
 
-              <p className="title-main">Main</p>
+              <p className="title-main">Main Course</p>
               <div className="d-flex justify-content-center">
                 <label className="labl">
                   <input
@@ -157,6 +189,11 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
                   <p className="color-white font-sm">Steak and Potatoes</p>
                 </label>
               </div>
+              <ErrorMessage
+                name={`meals.${index}.main`}
+                errors={reactHookForm.formState.errors}
+                render={() => <ErrorMsg>You haven't selected your main course</ErrorMsg>}
+              />
 
               <p className="title-main">Dessert</p>
               <div className="d-flex justify-content-center">
@@ -188,6 +225,11 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
                   <p className="color-white font-sm">RASPBERRY BAVAROIS WITH RASPBERRY SORBET</p>
                 </label>
               </div>
+              <ErrorMessage
+                name={`meals.${index}.dessert`}
+                errors={reactHookForm.formState.errors}
+                render={() => <ErrorMsg>You haven't selected your dessert</ErrorMsg>}
+              />
             </div>
           ))
         }

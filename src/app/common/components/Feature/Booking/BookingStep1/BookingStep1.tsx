@@ -11,6 +11,17 @@ import { BookingStep1Form, BookingStep1Props } from './types';
 
 const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   const { getValues, setValue } = useFormContext<BookingFormValues>();
+  const schema = Yup.object().shape({
+    booker: Yup.object().shape({
+      name: Yup.string().required(),
+      phone: Yup.string().required().concat(validationService.cellphoneNumbersSchema),
+    }),
+    others: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required(),
+      })
+    ),
+  });
   const reactHookForm = useForm<BookingStep1Form>({
     defaultValues: {
       date: getValues('date'),
@@ -26,19 +37,8 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
         birthday: '1995-02-15'
       }]
     },
-    resolver: yupResolver(
-      Yup.object().shape({
-        booker: Yup.object().shape({
-          name: Yup.string().required(),
-          phone: Yup.string().required().concat(validationService.cellphoneNumbersSchema),
-        }),
-        others: Yup.array().of(
-          Yup.object().shape({
-            name: Yup.string().required(),
-          })
-        ),
-      })
-    ),
+    /** @ts-ignore */
+    resolver: yupResolver(schema),
   });
 
   const handleAddPeople = () => {
