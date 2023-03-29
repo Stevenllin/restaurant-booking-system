@@ -7,7 +7,7 @@ export interface InputTextFieldProps
   label: string;
   type: string;
   placeholder?: string;
-  asterisk: boolean;
+  asterisk?: boolean;
   errors?: FieldErrors;
   handleChange?: (
     event: React.ChangeEvent<HTMLInputElement>

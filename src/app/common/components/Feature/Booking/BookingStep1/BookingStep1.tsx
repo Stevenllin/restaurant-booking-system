@@ -1,8 +1,11 @@
 import React from 'react';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { BookingFormValues } from '../BookingLayout/types';
 import { useFormContext } from 'react-hook-form';
 import InputTextField from 'app/common/components/Form/InputTextField/InputTextField';
+import validationService from 'app/core/service/validationService';
 import { AiOutlinePlusCircle } from 'react-icons/ai'; 
 import { BookingStep1Form, BookingStep1Props } from './types';
 
@@ -22,7 +25,20 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
         phone: '0978030930',
         birthday: '1995-02-15'
       }]
-    }
+    },
+    resolver: yupResolver(
+      Yup.object().shape({
+        booker: Yup.object().shape({
+          name: Yup.string().required(),
+          phone: Yup.string().required().concat(validationService.cellphoneNumbersSchema),
+        }),
+        others: Yup.array().of(
+          Yup.object().shape({
+            name: Yup.string().required(),
+          })
+        ),
+      })
+    ),
   });
 
   const handleAddPeople = () => {
@@ -64,12 +80,14 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
             type="text"
             asterisk
             {...reactHookForm.register('booker.name')}
+            errors={reactHookForm.formState.errors}
           />
           <InputTextField
             label="phone"
             type="tel"
             asterisk
             {...reactHookForm.register('booker.phone')}
+            errors={reactHookForm.formState.errors}
           />
         </div>
         <p className="title-main">Other's information</p>
@@ -81,11 +99,12 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
                 type="text"
                 asterisk
                 {...reactHookForm.register(`others.${person.id}.name`)}
+                errors={reactHookForm.formState.errors}
               />
               <InputTextField
                 label="phone"
                 type="tel"
-                asterisk
+                asterisk={false}
                 {...reactHookForm.register(`others.${person.id}.phone`)}
               />
             </div>

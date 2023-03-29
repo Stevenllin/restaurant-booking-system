@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import 'assets/scss/common.scss';
+import './app/core/service/yupService';
 
 ReactDOM.render(
   <React.StrictMode>
