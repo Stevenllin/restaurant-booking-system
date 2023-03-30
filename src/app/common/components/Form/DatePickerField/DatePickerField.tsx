@@ -40,8 +40,6 @@ const DatePickerField = <TFieldValues extends FieldValues>({ name, control, labe
   const handleCalendarSelectDate = (date: string) => {
     field.onChange(date)
   };
-
-  console.log('field', field.value);
   
   return (
     <div className="date-picker-field m-1">
@@ -79,7 +77,7 @@ const DatePickerField = <TFieldValues extends FieldValues>({ name, control, labe
         <ErrorMessage
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           /** @ts-ignore */
-          name={props.name}
+          name={name}
           errors={errors}
           render={({ message }) => <ErrorMsg>{message}</ErrorMsg>}
         />

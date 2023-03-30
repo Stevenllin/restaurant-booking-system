@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -9,6 +9,8 @@ import DatePickerField from 'app/common/components/Form/DatePickerField';
 import SelectField from 'app/common/components/Form/SelectField';
 import validationService from 'app/core/service/validationService';
 import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
+import { ErrorMessage } from '@hookform/error-message';
+import ErrorMsg from '../../../Form/ErrorMsg';
 import { AiOutlinePlusCircle } from 'react-icons/ai'; 
 import { BookingStep1Form, BookingStep1Props } from './types';
 
@@ -16,9 +18,6 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   const selectOptions = [{
       text: '17:00',
       value: '17:00',
-    }, {
-      text: '18:00',
-      value: '18:00',
     }, {
       text: '18:00',
       value: '18:00',
@@ -32,17 +31,24 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   ]
 
   const { getValues, setValue } = useFormContext<BookingFormValues>();
+
   const schema = Yup.object().shape({
+    date: Yup.string().required(),
+    time: Yup.string().required(),
+    period: Yup.string().concat(validationService.onlyAfterDateSchema),
     booker: Yup.object().shape({
       name: Yup.string().required(),
       phone: Yup.string().required().concat(validationService.cellphoneNumbersSchema),
+      birthday: Yup.string().required().concat(validationService.birthdaySchema)
     }),
     others: Yup.array().of(
       Yup.object().shape({
         name: Yup.string().required(),
+        birthday: Yup.string().required().concat(validationService.birthdaySchema)
       })
     ),
   });
+
   const reactHookForm = useForm<BookingStep1Form>({
     defaultValues: {
       date: getValues('date'),
@@ -56,13 +62,18 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
       others: [{
         id: 0,
         name: 'steven',
-        birthday: '1995-02-15',
+        birthday: '1995/02/15',
         phone: '0978030930'
       }]
     },
     /** @ts-ignore */
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    const period = reactHookForm.getValues('date') + ' ' + reactHookForm.getValues('time')
+    reactHookForm.setValue('period', period)
+  }, [reactHookForm.watch('date'), reactHookForm.watch('time')])
 
   const handleAddPeople = () => {
     const copiedOthers = reactHookForm.getValues('others')?.map(item => {
@@ -78,7 +89,6 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   };
 
   const handleSubmit = () => {
-    console.log('reactHookForm.getValues', reactHookForm.getValues());
     const bookerId = reactHookForm.getValues('booker.id');
     const bookerName = reactHookForm.getValues('booker.name');
     const bookerPhone = reactHookForm.getValues('booker.phone');
@@ -94,8 +104,11 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   };
 
   return (
-    <form className="d-flex flex-column align-items-center justify-content-between h-100 p-5" onSubmit={reactHookForm.handleSubmit(handleSubmit)}>
-      {/* <p className="font-md color-white">Basic Information</p> */}
+    <form
+      className="d-flex flex-column align-items-center justify-content-between h-100 p-5"
+      onSubmit={reactHookForm.handleSubmit(handleSubmit)}
+      autoComplete="off"
+    >
       <div className="booking-step1-content">
         <p className="title-main">Pick your date and time</p>
         <div className="w-100 d-flex mb-2">
@@ -105,15 +118,21 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
             asterisk
             mode={CalendarModeValuesEnum.Date}
             control={reactHookForm.control}
+            errors={reactHookForm.formState.errors}
           />
           <SelectField
             label="time"
             options={selectOptions}
-          asterisk
-          {...reactHookForm.register('time')}
-          errors={reactHookForm.formState.errors}
+            asterisk
+            {...reactHookForm.register('time')}
+            errors={reactHookForm.formState.errors}
           />
         </div>
+        <ErrorMessage
+          name="period"
+          errors={reactHookForm.formState.errors}
+          render={() => <ErrorMsg>Your date can not be before system time</ErrorMsg>}
+        />
         <p className="title-main">Booker's information</p>
         <div className="w-100 d-flex mb-2">
           <InputTextField
@@ -129,6 +148,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
             asterisk
             mode={CalendarModeValuesEnum.Birthday}
             control={reactHookForm.control}
+            errors={reactHookForm.formState.errors}
           />
           <InputTextField
             label="phone"
@@ -155,6 +175,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
                 asterisk
                 mode={CalendarModeValuesEnum.Birthday}
                 control={reactHookForm.control}
+                errors={reactHookForm.formState.errors}
               />
               <InputTextField
                 label="phone"
