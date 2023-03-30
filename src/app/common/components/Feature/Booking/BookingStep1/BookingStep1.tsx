@@ -111,7 +111,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
     >
       <div className="booking-step1-content">
         <p className="title-main">Pick your date and time</p>
-        <div className="w-100 d-flex mb-2">
+        <div className="w-100 d-flex mb-5">
           <DatePickerField
             label="date"
             name="date"
@@ -134,7 +134,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
           render={() => <ErrorMsg>Your date can not be before system time</ErrorMsg>}
         />
         <p className="title-main">Booker's information</p>
-        <div className="w-100 d-flex mb-2">
+        <div className="w-100 d-flex mb-5">
           <InputTextField
             label="username"
             type="text"
@@ -161,7 +161,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
         <p className="title-main">Other's information</p>
         {
           reactHookForm.watch('others')?.map((person) => (
-            <div key={person.id} className="w-100 d-flex mb-2">
+            <div key={person.id} className="w-100 d-flex">
               <InputTextField
                 label="username"
                 type="text"

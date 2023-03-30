@@ -48,6 +48,10 @@ button {
   font-size: $font-md;
 }
 
+.font-lg {
+  font-size: $font-lg;
+}
+
 .title-main {
   color: $color-white;
   font-size: $font-md;
@@ -56,6 +60,10 @@ button {
 
 .color-main {
   color: $color-main;
+}
+
+.color-minor {
+  color: $icon-color;
 }
 
 .color-white {

@@ -58,7 +58,7 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
     <form className="d-flex flex-column align-items-center justify-content-between h-100 p-5" onSubmit={reactHookForm.handleSubmit(handleSubmit)}>
       <p className="font-md color-white">Anything beverage?</p>
       <div className="booking-step3-content">
-        <p className="title-main">Cocktail</p>
+        <p className="title-main mt-5">Cocktail</p>
         <div className="d-flex justify-content-center">
           <div className="px-2">
             <div className="beverage-container beverage2">
@@ -166,7 +166,7 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
           </div>
         </div>
 
-        <p className="title-main">Soft Drink</p>
+        <p className="title-main mt-5">Soft Drink</p>
         <div className="d-flex justify-content-center">
           <div className="px-2">
             <div className="beverage-container beverage3">
@@ -221,7 +221,7 @@ const BookingStep3: React.FC<BookingStep3Props> = (props) => {
           </div>
         </div>
 
-        <p className="title-main">Coffee & Tea</p>
+        <p className="title-main mt-5">Coffee & Tea</p>
         <div className="d-flex justify-content-center">
           <div className="px-2">
             <div className="beverage-container beverage9">

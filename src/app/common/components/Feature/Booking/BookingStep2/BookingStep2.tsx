@@ -48,7 +48,7 @@ const BookingStep2: React.FC<BookingStep2Props> = (props) => {
       <div className="booking-step2-content">
         {
           customers.map((customer, index) => (
-            <div key={customer}>
+            <div key={customer} className="mb-5">
               <p className="color-main font-md"><span>Customer{index + 1} : </span>{customer}</p>
 
               <p className="title-main">Starter</p>
