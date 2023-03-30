@@ -18,7 +18,20 @@ const BookingStep4: React.FC = () => {
           customers.push(other)
         })
       }
-      setSummary({ period, customers, meals, beverage })
+      const customersUpdated = customers.map(customer => {
+        const age = commonService.convertAge(customer.birthday)
+        if (commonService.checkBirthday(customer.birthday)) {
+          return { ...customer, age: age, isBirthday: true }
+        } else {
+          return { ...customer, age: age, isBirthday: false }
+        }
+      })
+      setSummary({ 
+        customers: customersUpdated,
+        period,
+        meals,
+        beverage
+      })
     })()
   }, [getValues])
 
@@ -41,8 +54,22 @@ const BookingStep4: React.FC = () => {
           summary?.meals.map((item, index) => (
             <div key={index} className="mb-2">
               <div className="d-flex justify-content-between">
-                <p className="font-md color-main">{summary.customers[index].name} ( {commonService.convertAge(summary.customers[index].birthday)} )</p>
-                <p className="font-md color-main">45</p>
+                <p className="font-md color-main">{summary.customers[index].name} ( {summary.customers[index]?.age} )</p>
+                {
+                  summary.customers[index].age <= 12 && (
+                    <p className="font-md color-main">45 * 0.5 = 22.5 </p>
+                  )
+                }
+                {
+                  summary.customers[index].age > 12 && summary.customers[index].isBirthday && (
+                    <p className="font-md color-main">45 * 0.8 = 36 </p>
+                  )
+                }
+                {
+                  summary.customers[index].age > 12 && summary.customers[index].isBirthday === false && (
+                    <p className="font-md color-main">45</p>
+                  )
+                }
               </div>
               <div className="d-flex justify-content-end">
                 <p className="font-md color-main">{item.starter}</p>
