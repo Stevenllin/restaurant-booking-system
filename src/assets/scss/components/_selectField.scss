@@ -1,0 +1,23 @@
+.select-text-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & label {
+    font-size: $font-md;
+    color: $color-main;
+  }
+  & select {
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0.6rem 0.6rem;
+    color: $color-white;
+    background-color: $background-input-color;
+    border-radius: $border-radius-xs;
+    border: 2px solid $background-input-color;
+  }
+  & select:focus {
+    border: 2px solid $border-color-focus;
+  }
+}
