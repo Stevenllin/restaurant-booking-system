@@ -1,10 +1,11 @@
 import { UseControllerProps, FieldValues, FieldErrors } from 'react-hook-form';
-import { DatePickerProps } from '../Element/DatePicker/types';
+import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
 
 export type DatePickerFieldPropsType<TFieldValues extends FieldValues> = DatePickerFieldProps & UseControllerProps<TFieldValues>;
 
-export interface DatePickerFieldProps extends DatePickerProps {
+export interface DatePickerFieldProps {
   label?: string;
+  mode: CalendarModeValuesEnum;
   asterisk?: boolean;
   errors?: FieldErrors;
 }

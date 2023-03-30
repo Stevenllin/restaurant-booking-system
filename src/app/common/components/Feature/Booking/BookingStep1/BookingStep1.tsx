@@ -7,6 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import InputTextField from 'app/common/components/Form/InputTextField/InputTextField';
 import DatePickerField from 'app/common/components/Form/DatePickerField';
 import validationService from 'app/core/service/validationService';
+import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
 import { AiOutlinePlusCircle } from 'react-icons/ai'; 
 import { BookingStep1Form, BookingStep1Props } from './types';
 
@@ -29,18 +30,20 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
       booker: {
         id: getValues('booker.id'),
         name: getValues('booker.name'),
+        birthday: getValues('booker.birthday'),
         phone: getValues('booker.phone')
       },
       others: [{
         id: 0,
         name: 'steven',
-        phone: '0978030930',
-        birthday: '1995-02-15'
+        birthday: '1995-02-15',
+        phone: '0978030930'
       }]
     },
     /** @ts-ignore */
     resolver: yupResolver(schema),
   });
+
 
   const handleAddPeople = () => {
     const copiedOthers = reactHookForm.getValues('others')?.map(item => {
@@ -56,6 +59,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   };
 
   const handleSubmit = () => {
+    console.log('reactHookForm.getValues', reactHookForm.getValues());
     const bookerId = reactHookForm.getValues('booker.id');
     const bookerName = reactHookForm.getValues('booker.name');
     const bookerPhone = reactHookForm.getValues('booker.phone');
@@ -85,7 +89,9 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
           />
           <DatePickerField
             label="birthday"
-            name="booker.name"
+            name="booker.birthday"
+            mode={CalendarModeValuesEnum.Birthday}
+            control={reactHookForm.control}
           />
           <InputTextField
             label="phone"
@@ -109,6 +115,8 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
               <DatePickerField
                 label="birthday"
                 name={`others.${person.id}.birthday`}
+                mode={CalendarModeValuesEnum.Birthday}
+                control={reactHookForm.control}
               />
               <InputTextField
                 label="phone"

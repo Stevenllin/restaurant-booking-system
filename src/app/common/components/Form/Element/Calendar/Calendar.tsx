@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
 import moment from 'moment';
 import { CalendarProps, CalendarDate, DayOptions, WeekOptions, MonthOptions, YearOptions } from './types';
 
@@ -17,9 +18,16 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
 
   const handleCreateYearOptions = () => {
     const currentYear = +panelDateState.year;
-    const futureYearCount = 30;
-    const options = Array.from(Array(currentYear + futureYearCount), (_, index) => ({ value: String(index + 1), text: String(index + 1) })).reverse();
-    return options;
+    switch(props.mode){
+      case(CalendarModeValuesEnum.Birthday): {
+        const options = Array.from(Array(101), (_, index) => ({ value: String(currentYear - index), text: String(currentYear - index) })).reverse()
+        return options;
+      }
+      case(CalendarModeValuesEnum.Date): {
+        const options = Array.from(Array(2), (_, index) => ({ value: String(currentYear + index), text: String(currentYear + index) })).reverse()
+        return options;
+      }
+    }
   }
 
   const handleCreateMonthOptions = () => {
@@ -33,7 +41,6 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
     if (lastOption) options.unshift(lastOption);
     return options;
   }
-
 
   const handleCreateDayOptions = () => {
     const year = parseInt(panelDateState.year)
@@ -50,8 +57,19 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
     }
 
     return options;
-
   }
+
+  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPanelDateState((prevState) => ({ ...prevState, year: event.target.value }));
+  };
+
+  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPanelDateState((prevState) => ({ ...prevState, month: event.target.value }));
+  };
+
+  const handleSelectDate = (date: string) => {
+    props.onSelectDate(date);
+  };
 
   const monthOptions: MonthOptions[] = handleCreateMonthOptions();
   const weekOptions: WeekOptions[] = handleCreateWeekOptions();
@@ -59,9 +77,9 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
   const yearOptions: YearOptions[] = handleCreateYearOptions();
 
   return (
-    <div className="calendar">
+    <div ref={ref} className="calendar">
       <div className="calendar-header">
-        <select>
+        <select value={panelDateState.year} onChange={handleYearChange}>
           {yearOptions.map((option) => (
             <option value={option.value} key={option.value}>
               {option.text}
@@ -69,7 +87,7 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
           ))}
         </select>
         <span>year</span>
-        <select>
+        <select value={panelDateState.month} onChange={handleMonthChange}>
           {monthOptions.map((option) => (
             <option value={option.value} key={option.value}>
               {option.text}
@@ -99,7 +117,9 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
                     }
                     key={index}
                   >
-                    <span>
+                    <span
+                      onClick={() => handleSelectDate(option.value)}
+                    >
                       {option.text}
                     </span>
                   </li>

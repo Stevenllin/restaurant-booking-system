@@ -1,6 +1,10 @@
+import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
+
 export interface CalendarProps {
+  mode: CalendarModeValuesEnum;
   todayDate: string;
   currentDate: string[];
+  onSelectDate: (date: string) => void;
 }
 
 export interface CalendarDate {
