@@ -4,6 +4,7 @@ export interface BookingStep1Props {
 
 export interface BookingStep1Form {
   date: string;
+  time: string;
   booker: Information;
   others?: Information[];
 }

@@ -6,12 +6,31 @@ import { BookingFormValues } from '../BookingLayout/types';
 import { useFormContext } from 'react-hook-form';
 import InputTextField from 'app/common/components/Form/InputTextField/InputTextField';
 import DatePickerField from 'app/common/components/Form/DatePickerField';
+import SelectField from 'app/common/components/Form/SelectField';
 import validationService from 'app/core/service/validationService';
 import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
 import { AiOutlinePlusCircle } from 'react-icons/ai'; 
 import { BookingStep1Form, BookingStep1Props } from './types';
 
 const BookingStep1: React.FC<BookingStep1Props> = (props) => {
+  const selectOptions = [{
+      text: '17:00',
+      value: '17:00',
+    }, {
+      text: '18:00',
+      value: '18:00',
+    }, {
+      text: '18:00',
+      value: '18:00',
+    }, {
+      text: '19:00',
+      value: '19:00',
+    }, {
+      text: '20:00',
+      value: '20:00',
+    }
+  ]
+
   const { getValues, setValue } = useFormContext<BookingFormValues>();
   const schema = Yup.object().shape({
     booker: Yup.object().shape({
@@ -27,6 +46,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   const reactHookForm = useForm<BookingStep1Form>({
     defaultValues: {
       date: getValues('date'),
+      time: getValues('time'),
       booker: {
         id: getValues('booker.id'),
         name: getValues('booker.name'),
@@ -43,7 +63,6 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
     /** @ts-ignore */
     resolver: yupResolver(schema),
   });
-
 
   const handleAddPeople = () => {
     const copiedOthers = reactHookForm.getValues('others')?.map(item => {
@@ -78,6 +97,23 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
     <form className="d-flex flex-column align-items-center justify-content-between h-100 p-5" onSubmit={reactHookForm.handleSubmit(handleSubmit)}>
       {/* <p className="font-md color-white">Basic Information</p> */}
       <div className="booking-step1-content">
+        <p className="title-main">Pick your date and time</p>
+        <div className="w-100 d-flex mb-2">
+          <DatePickerField
+            label="date"
+            name="date"
+            asterisk
+            mode={CalendarModeValuesEnum.Date}
+            control={reactHookForm.control}
+          />
+          <SelectField
+            label="time"
+            options={selectOptions}
+          asterisk
+          {...reactHookForm.register('time')}
+          errors={reactHookForm.formState.errors}
+          />
+        </div>
         <p className="title-main">Booker's information</p>
         <div className="w-100 d-flex mb-2">
           <InputTextField
@@ -90,6 +126,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
           <DatePickerField
             label="birthday"
             name="booker.birthday"
+            asterisk
             mode={CalendarModeValuesEnum.Birthday}
             control={reactHookForm.control}
           />
@@ -115,6 +152,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
               <DatePickerField
                 label="birthday"
                 name={`others.${person.id}.birthday`}
+                asterisk
                 mode={CalendarModeValuesEnum.Birthday}
                 control={reactHookForm.control}
               />

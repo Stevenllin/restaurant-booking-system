@@ -46,7 +46,7 @@ const DatePickerField = <TFieldValues extends FieldValues>({ name, control, labe
   return (
     <div className="date-picker-field m-1">
       {label && (
-        <label className="my-2">
+        <label className="mt-2">
           <p className="text-uppercase d-flex align-items-center">
             {label} {asterisk && <span className="color-danger ms-2">*</span>}
           </p>
