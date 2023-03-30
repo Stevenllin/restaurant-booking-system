@@ -113,7 +113,7 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
                     className={
                       'calendar-day' +
                       (props.todayDate === option.value ? ' calendar-day-today' : '') +
-                      (props.currentDate.includes(option.value) ? 'calendar-day-active' : '')
+                      (props.currentDate.includes(option.value) ? ' calendar-day-active' : '')
                     }
                     key={index}
                   >
