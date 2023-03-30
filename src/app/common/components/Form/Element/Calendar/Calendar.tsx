@@ -17,7 +17,7 @@ const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>((props, ref) =>
   });
 
   const handleCreateYearOptions = () => {
-    const currentYear = +panelDateState.year;
+    const currentYear = +todayDateSnippets[0];
     switch(props.mode){
       case(CalendarModeValuesEnum.Birthday): {
         const options = Array.from(Array(101), (_, index) => ({ value: String(currentYear - index), text: String(currentYear - index) })).reverse()
