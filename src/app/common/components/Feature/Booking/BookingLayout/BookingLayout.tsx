@@ -9,6 +9,7 @@ import { RiMoneyPoundCircleFill } from 'react-icons/ri';
 import BookingStep1 from '../BookingStep1/BookingStep1';
 import BookingStep2 from '../BookingStep2/BookingStep2';
 import BookingStep3 from '../BookingStep3/BookingStep3';
+import BookingStep4 from '../BookingStep4/BookingStep4';
 import { BookingFormValues } from './types';
 
 const BookingLayout: React.FC = () => {
@@ -58,6 +59,7 @@ const BookingLayout: React.FC = () => {
             {currentStep === 1 && <BookingStep1 setStep={handleSetCurrentStep} />}
             {currentStep === 2 && <BookingStep2 setStep={handleSetCurrentStep} />}
             {currentStep === 3 && <BookingStep3 setStep={handleSetCurrentStep} />}
+            {currentStep === 4 && <BookingStep4 />}
           </div>
         </FormProvider>
       </motion.div>

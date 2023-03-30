@@ -59,12 +59,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
         birthday: getValues('booker.birthday'),
         phone: getValues('booker.phone')
       },
-      others: [{
-        id: 0,
-        name: 'steven',
-        birthday: '1995/02/15',
-        phone: '0978030930'
-      }]
+      others: []
     },
     /** @ts-ignore */
     resolver: yupResolver(schema),
@@ -73,6 +68,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   useEffect(() => {
     const period = reactHookForm.getValues('date') + ' ' + reactHookForm.getValues('time')
     reactHookForm.setValue('period', period)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reactHookForm.watch('date'), reactHookForm.watch('time')])
 
   const handleAddPeople = () => {
@@ -89,16 +85,20 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   };
 
   const handleSubmit = () => {
+    const period = reactHookForm.getValues('period');
     const bookerId = reactHookForm.getValues('booker.id');
     const bookerName = reactHookForm.getValues('booker.name');
     const bookerPhone = reactHookForm.getValues('booker.phone');
+    const bookerBirthday = reactHookForm.getValues('booker.birthday');
     const copiedOthers = reactHookForm.getValues('others')?.map(item => {
       return { ...item }
     }) ?? []
 
+    setValue('period', period)
     setValue('booker.id', bookerId)
     setValue('booker.name', bookerName)
     setValue('booker.phone', bookerPhone)
+    setValue('booker.birthday', bookerBirthday)
     setValue('others', copiedOthers)
     props.setStep(1)
   };

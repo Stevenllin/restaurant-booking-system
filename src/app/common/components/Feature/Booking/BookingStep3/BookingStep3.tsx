@@ -7,7 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import { BookingStep3Props, BookingStep3Form } from './types';
 
 const BookingStep3: React.FC<BookingStep3Props> = (props) => {
-  const { getValues, setValue } = useFormContext<BookingFormValues>();
+  const { setValue } = useFormContext<BookingFormValues>();
 
   const reactHookForm = useForm<BookingStep3Form>({
     defaultValues: {

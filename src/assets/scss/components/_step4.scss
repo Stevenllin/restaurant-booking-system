@@ -1,0 +1,14 @@
+.booking-step4-content {
+  height: 100%;
+  width: 70%;
+  overflow-y: scroll;
+
+  .title {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: $font-md;
+    color: $color-white;
+    background: $background-input-color;
+    border-radius: $border-radius-sm;
+  }
+}
