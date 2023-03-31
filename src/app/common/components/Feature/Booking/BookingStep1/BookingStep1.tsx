@@ -72,17 +72,25 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
   }, [reactHookForm.watch('date'), reactHookForm.watch('time')])
 
   const handleAddPeople = () => {
-    const copiedOthers = reactHookForm.getValues('others')?.map(item => {
+    const copiedOthers = reactHookForm.getValues('others')?.map((item, index) => {
       return { ...item }
     }) ?? []
     copiedOthers.push({
-      id: copiedOthers.length,
+      id: Math.random(),
       name: '',
       phone: '',
       birthday: ''
     });
     reactHookForm.setValue('others', copiedOthers);
   };
+
+  const handleDeletePeople = (index: number) => {
+    const copiedOthers = reactHookForm.getValues('others')?.map(item => {
+      return { ...item }
+    }) ?? []
+    const copiedOthersUpdated = copiedOthers.filter(other => other.id !== index)
+    reactHookForm.setValue('others', copiedOthersUpdated);
+  }
 
   const handleSubmit = () => {
     const period = reactHookForm.getValues('period');
@@ -164,7 +172,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
             <div key={person.id} className="w-100 mb-5 others">
               <div className="w-100 d-flex justify-content-between">
                 <p className="font-md color-main m-1">Customer {index + 1}</p>
-                <div className="m-1 delete">
+                <div className="m-1 delete" onClick={() => handleDeletePeople(person.id)}>
                   <AiFillDelete />
                 </div>
               </div>
@@ -173,12 +181,12 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
                   label="username"
                   type="text"
                   asterisk
-                  {...reactHookForm.register(`others.${person.id}.name`)}
+                  {...reactHookForm.register(`others.${index}.name`)}
                   errors={reactHookForm.formState.errors}
                 />
                 <DatePickerField
                   label="birthday"
-                  name={`others.${person.id}.birthday`}
+                  name={`others.${index}.birthday`}
                   asterisk
                   mode={CalendarModeValuesEnum.Birthday}
                   control={reactHookForm.control}
@@ -188,7 +196,7 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
                   label="phone"
                   type="tel"
                   asterisk={false}
-                  {...reactHookForm.register(`others.${person.id}.phone`)}
+                  {...reactHookForm.register(`others.${index}.phone`)}
                 />
               </div>
             </div>
