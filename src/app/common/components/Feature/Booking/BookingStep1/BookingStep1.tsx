@@ -11,7 +11,7 @@ import validationService from 'app/core/service/validationService';
 import { CalendarModeValuesEnum } from 'app/core/enum/common/calendarModeValuesEnum';
 import { ErrorMessage } from '@hookform/error-message';
 import ErrorMsg from '../../../Form/ErrorMsg';
-import { AiOutlinePlusCircle } from 'react-icons/ai'; 
+import { AiOutlinePlusCircle, AiFillDelete } from 'react-icons/ai'; 
 import { BookingStep1Form, BookingStep1Props } from './types';
 
 const BookingStep1: React.FC<BookingStep1Props> = (props) => {
@@ -160,33 +160,41 @@ const BookingStep1: React.FC<BookingStep1Props> = (props) => {
         </div>
         <p className="title-main">Other's information</p>
         {
-          reactHookForm.watch('others')?.map((person) => (
-            <div key={person.id} className="w-100 d-flex">
-              <InputTextField
-                label="username"
-                type="text"
-                asterisk
-                {...reactHookForm.register(`others.${person.id}.name`)}
-                errors={reactHookForm.formState.errors}
-              />
-              <DatePickerField
-                label="birthday"
-                name={`others.${person.id}.birthday`}
-                asterisk
-                mode={CalendarModeValuesEnum.Birthday}
-                control={reactHookForm.control}
-                errors={reactHookForm.formState.errors}
-              />
-              <InputTextField
-                label="phone"
-                type="tel"
-                asterisk={false}
-                {...reactHookForm.register(`others.${person.id}.phone`)}
-              />
+          reactHookForm.watch('others')?.map((person, index) => (
+            <div key={person.id} className="w-100 mb-5 others">
+              <div className="w-100 d-flex justify-content-between">
+                <p className="font-md color-main m-1">Customer {index + 1}</p>
+                <div className="m-1 delete">
+                  <AiFillDelete />
+                </div>
+              </div>
+              <div className="d-flex">
+                <InputTextField
+                  label="username"
+                  type="text"
+                  asterisk
+                  {...reactHookForm.register(`others.${person.id}.name`)}
+                  errors={reactHookForm.formState.errors}
+                />
+                <DatePickerField
+                  label="birthday"
+                  name={`others.${person.id}.birthday`}
+                  asterisk
+                  mode={CalendarModeValuesEnum.Birthday}
+                  control={reactHookForm.control}
+                  errors={reactHookForm.formState.errors}
+                />
+                <InputTextField
+                  label="phone"
+                  type="tel"
+                  asterisk={false}
+                  {...reactHookForm.register(`others.${person.id}.phone`)}
+                />
+              </div>
             </div>
           ))
         }
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center my-5">
           <button type="button" onClick={handleAddPeople}>
             <AiOutlinePlusCircle />
           </button>
